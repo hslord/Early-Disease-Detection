@@ -24,6 +24,7 @@ def prep_dfs(results_csv, label_csv):
     X = None
     labels = None
     features = None
+    
     return X, labels, features
 
 
@@ -96,6 +97,7 @@ def get_model():
               'max_depth': [3, 5, 10], 'subsample': [0.5]}
     model = GridSearchCV(
         GradientBoostingClassifier(), params, cv=cv)
+    
     return model
 
 
@@ -189,6 +191,7 @@ def lasso_gbt(X, labels):
 
     lasso_model = get_model()
     lasso_model.fit(X_lasso, labels)
+    
     with open('lasso_gbt.pkl', 'wb') as pkl:
         pickle.dump(lasso_model, pkl)
 
@@ -209,6 +212,7 @@ def rf_gbt(X, labels):
 
     rf_model = get_model()
     rf_model.fit(X_rf, labels)
+    
     with open('rf_gbt.pkl', 'wb') as pkl:
         pickle.dump(rf_model, pkl)
 
