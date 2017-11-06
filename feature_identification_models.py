@@ -23,6 +23,7 @@ def prep_dfs(results_csv, labels_csv):
     X = None
     labels = None
     features = None
+    
     return X, labels, features
 
 
@@ -161,6 +162,7 @@ def get_feat_dict(feat_lol):
     for lst in feat_lol[1:]:
         for feat in lst:
             feat_dict[feat] += 1
+    
     return feat_dict
 
 
@@ -182,6 +184,7 @@ def lasso_feats_gbt(X, labels, features):
 
     lasso_feats_model = get_model()
     lasso_feats_model.fit(X_lasso, labels)
+    
     with open('lasso_feats_gbt.pkl', 'wb') as pkl:
         pickle.dump(lasso_feats_model, pkl)
 
@@ -205,13 +208,14 @@ def rf_feats_gbt(X, labels, features):
 
     rf_feats_model = get_model()
     rf_feats_model.fit(X_rf, labels)
+    
     with open('rf_feats_gbt.pkl', 'wb') as pkl:
         pickle.dump(rf_feats_model, pkl)
 
 
 if __name__ == '__main__':
     X, labels, features = prep_dfs(
-        'results_csv', 'labels_csv')
+        'results.csv', 'labels.csv')
 
     lasso, rf = get_features(X, labels, features, iterations=50)
 
